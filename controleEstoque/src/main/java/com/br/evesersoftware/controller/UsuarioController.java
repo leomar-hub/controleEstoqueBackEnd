@@ -19,8 +19,8 @@ import com.br.evesersoftware.model.Usuario;
 import com.br.evesersoftware.repository.UsuarioRepository;
 
 @RestController
-@RequestMapping(value = "/usuario")
-public class IndexUsuarioController {
+@RequestMapping(value = "/usuarios")
+public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
