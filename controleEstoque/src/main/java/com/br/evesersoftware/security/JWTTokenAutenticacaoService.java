@@ -5,9 +5,15 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import com.br.evesersoftware.model.Usuario;
+import com.br.evesersoftware.repository.UsuarioRepository;
+import com.br.evesersoftware.sistema.ApplicationContextLoad;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -60,15 +66,22 @@ public class JWTTokenAutenticacaoService {
 					          .getBody().getSubject();
 			if(user != null) {
 				
+				Usuario usuario = ApplicationContextLoad.getApplicationContext()
+						.getBean(UsuarioRepository.class).findUserByLogin(user);
 				
+				if(usuario != null) {
+					
+					return new UsernamePasswordAuthenticationToken(
+							usuario.getLogin(), 
+							usuario.getSenha(),
+							usuario.getAuthorities());
+				}
 				
-			}else {
-				return null; /*Não autorizado*/
 			}
 			
-		}else {
-			return null; /*Não autorizado*/
 		}
+		
+		return null; /*Não autorizado*/
 		
 	}
 	
