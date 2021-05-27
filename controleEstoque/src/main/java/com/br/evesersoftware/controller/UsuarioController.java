@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,12 +44,16 @@ public class UsuarioController {
 	
 	@PostMapping(value = "/", produces="application/json")
 	public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario){
+		
+		String senhacriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha());
+		usuario.setSenha(senhacriptografada);
 		Usuario usuarioSalvo = usuarioRepository.save(usuario);
 		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/{id}", produces="application/json")
+	@PutMapping(value = "/", produces="application/json")
 	public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario){
+		
 		Usuario usuarioSalvo = usuarioRepository.save(usuario);
 		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK);
 	}
