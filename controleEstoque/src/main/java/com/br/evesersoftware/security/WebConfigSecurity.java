@@ -45,7 +45,11 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+		/*Service que irá consultar o usuário no bando de dados*/
 		auth.userDetailsService(implementacaoUserDetailsService)
+		
+		/*Padrão de codificação de senha*/
 		.passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
