@@ -48,6 +48,9 @@ public class JWTTokenAutenticacaoService {
 		/*Adiciona no cabeçalho http*/
 		response.addHeader(HEADER_STRING, token); /*Authorization: Bearer 564454vd4fgvd487f98n4df4gn5e4d4d5g45df4g8h*/
 		
+		/*Liberando resposta para porta diferente do projeto angular --CORS--*/
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		
 		/*Escreve token como resposta no corpo http*/
 		response.getWriter().write("{\"Authorization\": \""+token+"\"}");
 		

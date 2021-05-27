@@ -25,7 +25,7 @@ public class ControleEstoqueApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ControleEstoqueApplication.class, args);
-		System.out.println(new BCryptPasswordEncoder().encode("123"));
+		/*System.out.println(new BCryptPasswordEncoder().encode("123"));*/
 	}
 	
 	/*Mapeamento Global que refletem em todo o sistema*/
